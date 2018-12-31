@@ -19,6 +19,7 @@
         - nvidia-driver-415
         - nvidia-settings
         - libnvidia-gl-415:i386
+        - ir-keytable
         - kodi
         - steam
         state: present
@@ -39,3 +40,8 @@
       template:
         src: templates/mcewakeup.rules.j2
         dest: /etc/udev/rules.d/90-mcewakeup.rules
+    - name: Add ir keymap for mceusb
+      become: true
+      template:
+        src: templates/rc6_mce.j2
+        dest: /etc/rc_keymaps/rc6_mce
