@@ -14,10 +14,18 @@
         cache_valid_time: 86400 # one day
     - name: Install desktop packages
       become: true
-      apt: name={{item}} state=present
-      with_items:
+      apt:
+        name:
         - nvidia-driver-415
         - nvidia-settings
         - libnvidia-gl-415:i386
         - kodi
         - steam
+        state: present
+    - name: Remove unneeded packages
+      become: true
+      apt:
+        name:
+          - xscreensaver
+          - lirc
+        state: absent
