@@ -29,3 +29,13 @@
           - xscreensaver
           - lirc
         state: absent
+    - name: Allow resume for user
+      become: true
+      template:
+        src: templates/custom-actions.pkla.j2
+        dest: /etc/polkit-1/localauthority/50-local.d/custom-actions.pkla
+    - name: Enable suspend/resume via remote
+      become: true
+      template:
+        src: templates/mcewakeup.rules.j2
+        dest: /etc/udev/rules.d/90-mcewakeup.rules
